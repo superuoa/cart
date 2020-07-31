@@ -9,8 +9,9 @@ public class Cart {
 
 	int id;
 	int product_id;
-	int discount;
 	Product product;
+	int unit;
+	int amount;
 	
 	public int getId() {
 		return id;
@@ -24,12 +25,6 @@ public class Cart {
 	public void setProduct_id(int product_id) {
 		this.product_id = product_id;
 	}
-	public int getDiscount() {
-		return discount;
-	}
-	public void setDiscount(int discount) {
-		this.discount = discount;
-	}
 	public Product getProduct() {
 		return product;
 	}
@@ -37,6 +32,19 @@ public class Cart {
 		this.product = product;
 	}
 	
+	
+	public int getUnit() {
+		return unit;
+	}
+	public void setUnit(int unit) {
+		this.unit = unit;
+	}
+	public int getAmount() {
+		return amount;
+	}
+	public void setAmount(int amount) {
+		this.amount = amount;
+	}
 	public static List<Cart> buildJsonToCallsObject(String json){
 
 		Gson gson = new Gson();

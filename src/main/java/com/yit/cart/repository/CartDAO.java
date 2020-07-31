@@ -12,5 +12,8 @@ public interface CartDAO {
 
 	List<Cart> getCarts();
 	int insertCart(Cart cart);
+	int deleteItem(Cart cart);
+	int countItem(Cart cart);
+	
 	
 }

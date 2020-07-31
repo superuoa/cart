@@ -26,8 +26,10 @@ public class CartDAOImpl implements CartDAO{
 	public List<Cart> getCarts() {
 		MapSqlParameterSource param = new MapSqlParameterSource();
 
-		List<Cart> mm = template.query("select * from cart c"
-										+" INNER JOIN product p on p.id = c.product_id"
+		List<Cart> mm = template.query(
+				"select *,count(p.id) as unit,sum(p.price) as amount from cart c" + 
+						" INNER JOIN product p on p.id = c.product_id" + 
+						" GROUP BY p.id"
 										, param,new CartRowMapper());
 		
 		return mm;
@@ -37,12 +39,34 @@ public class CartDAOImpl implements CartDAO{
 	public int insertCart(Cart cart) {
 		MapSqlParameterSource param = new MapSqlParameterSource();
         param.addValue("product_id",cart.getProduct_id());
-        param.addValue("discount", cart.getDiscount());
         param.addValue("date", new Date());
         
-        int mm = template.update("insert into cart(product_id,discount,date) "
-        		+ "values(:product_id,:discount,:date)", param);
+        int mm = template.update("insert into cart(product_id,date) "
+        		+ "values(:product_id,:date)", param);
 		
+		return mm;
+	}
+
+
+	@Override
+	public int deleteItem(Cart cart) {
+		MapSqlParameterSource param = new MapSqlParameterSource();
+        param.addValue("product_id",cart.getProduct_id());
+        int mm = template.update(
+        					"DELETE from cart WHERE product_id=:product_id "
+        					+ " order by id desc limit 1", param);
+		
+		return mm;
+	}
+
+
+	@Override
+	public int countItem(Cart cart) {
+		MapSqlParameterSource param = new MapSqlParameterSource();
+		param.addValue("product_id",cart.getProduct_id());
+		
+        int mm = template.queryForObject("select count(*) from cart WHERE product_id=:product_id",param, Integer.class);
+
 		return mm;
 	}
 

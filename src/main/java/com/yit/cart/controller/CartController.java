@@ -38,6 +38,8 @@ public class CartController {
       
 		System.out.println(">>>>>>>> Log Debug message Add to cart ");
         
+		System.out.println(">>>>>>>> Add to cart json " + json);
+		
 		Cart c = Cart.buildJsonToObject(json);
 
 		int s = cartDao.insertCart(c);
@@ -47,4 +49,25 @@ public class CartController {
     }
 	
 
+	@PostMapping("/deleteItem")
+    public Object deleteItem(@RequestBody String json) {
+      
+		System.out.println(">>>>>>>> Log Debug message Delete Cart ");
+        
+		System.out.println(">>>>>>>> Delete cart json " + json);
+		
+		Cart c = Cart.buildJsonToObject(json);
+
+		int s = cartDao.deleteItem(c);
+	
+		if(s == 1) {
+			List<Cart> list = cartDao.getCarts();
+
+			return list;
+		}
+		System.out.println("result delete Cart " + s);
+		return s;
+		
+    }
+	
 }

@@ -17,7 +17,6 @@ public class CartRowMapper implements RowMapper<Cart>  {
 
 		Cart c = new Cart();
 		c.setId(rs.getInt("id"));
-		c.setDiscount(rs.getInt("discount"));
 		c.setProduct_id(rs.getInt("product_id"));
 	
 		if(MapperUtil.isThere(rs, "p.id")) {
@@ -30,6 +29,12 @@ public class CartRowMapper implements RowMapper<Cart>  {
 			c.setProduct(p);
 		}
 		
+		if(MapperUtil.isThere(rs, "unit")) {
+			c.setUnit(rs.getInt("unit"));
+		}
+		if(MapperUtil.isThere(rs, "amount")) {
+			c.setAmount(rs.getInt("amount"));
+		}
 		
 		return c;
 	}
