@@ -17,7 +17,7 @@ public class CartRowMapper implements RowMapper<Cart>  {
 
 		Cart c = new Cart();
 		c.setId(rs.getInt("id"));
-		c.setProduct_id(rs.getInt("product_id"));
+		c.setProductId(rs.getInt("product_id"));
 	
 		if(MapperUtil.isThere(rs, "p.id")) {
 			Product p = new Product();

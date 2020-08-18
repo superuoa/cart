@@ -38,7 +38,7 @@ public class CartDAOImpl implements CartDAO{
 	@Override
 	public int insertCart(Cart cart) {
 		MapSqlParameterSource param = new MapSqlParameterSource();
-        param.addValue("product_id",cart.getProduct_id());
+        param.addValue("product_id",cart.getProductId());
         param.addValue("date", new Date());
         
         int mm = template.update("insert into cart(product_id,date) "
@@ -51,7 +51,7 @@ public class CartDAOImpl implements CartDAO{
 	@Override
 	public int deleteItem(Cart cart) {
 		MapSqlParameterSource param = new MapSqlParameterSource();
-        param.addValue("product_id",cart.getProduct_id());
+        param.addValue("product_id",cart.getProductId());
         int mm = template.update(
         					"DELETE from cart WHERE product_id=:product_id "
         					+ " order by id desc limit 1", param);
@@ -63,7 +63,7 @@ public class CartDAOImpl implements CartDAO{
 	@Override
 	public int countItem(Cart cart) {
 		MapSqlParameterSource param = new MapSqlParameterSource();
-		param.addValue("product_id",cart.getProduct_id());
+		param.addValue("product_id",cart.getProductId());
 		
         int mm = template.queryForObject("select count(*) from cart WHERE product_id=:product_id",param, Integer.class);
 

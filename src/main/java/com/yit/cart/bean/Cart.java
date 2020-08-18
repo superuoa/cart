@@ -8,7 +8,7 @@ import com.google.gson.reflect.TypeToken;
 public class Cart {
 
 	int id;
-	int product_id;
+	int productId;
 	Product product;
 	int unit;
 	int amount;
@@ -19,11 +19,12 @@ public class Cart {
 	public void setId(int id) {
 		this.id = id;
 	}
-	public int getProduct_id() {
-		return product_id;
+	
+	public int getProductId() {
+		return productId;
 	}
-	public void setProduct_id(int product_id) {
-		this.product_id = product_id;
+	public void setProductId(int productId) {
+		this.productId = productId;
 	}
 	public Product getProduct() {
 		return product;
