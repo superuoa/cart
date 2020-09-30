@@ -1,0 +1,18 @@
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: cart
+    hpecp.hpe.com/hpecp-internal-gateway: "true"
+  name: cart-service
+spec:
+  externalTrafficPolicy: Cluster
+  ports:
+  - port: 8080
+    name: "web"
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: cart
+  sessionAffinity: None
+  type: NodePort
